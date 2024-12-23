@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "Please cite usage of the repository code as indicated below."
+authors:
+- family-names: "Schmitt"
+  given-names: "Rico Andre"
+  orcid: "https://orcid.org/0009-0001-3568-2203"
+- family-names: "Bülau"
+  given-names: "Konstantin"
+  orcid: "https://orcid.org/0000-0001-5266-7235"
+- family-names: "Martin"
+  given-names: "Leon"
+  orcid: "https://orcid.org/0000-0002-2599-0165"
+- family-names: "Hüttl"
+  given-names: "Christoph"
+  orcid: "https://orcid.org/0009-0003-4570-6832"
+- family-names: "Schirner"
+  given-names: "Michael"
+  orcid: "https://orcid.org/0000-0001-8227-8476"
+- family-names: "Stefanovski"
+  given-names: "Leon"
+  orcid: "https://orcid.org/0000-0003-0197-2576"
+- family-names: "Ritter"
+  given-names: "Petra"
+  orcid: "https://orcid.org/0000-0002-4643-4782"
+title: "Biological database mining for LLM-driven Alzheimers Disease Drug Repurposing Code"
+version: 0.1
+doi: https://doi.org/10.1101/2024.12.04.626255
+date-released: 2024-12-23
+url: "https://github.com/RicoSchmitt/allmzheimer.git"
