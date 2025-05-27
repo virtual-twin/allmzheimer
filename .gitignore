@@ -16,7 +16,6 @@ docs/logs/
 
 # Ignore other generated files
 *.tsv
-*.json
 *.jpg
 *.mov
 *.mp4
