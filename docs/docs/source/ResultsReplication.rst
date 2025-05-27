@@ -21,11 +21,6 @@ JSON_prompt_generator.py
 JSONdrug2LLM.py
 integrate_cluster_jsons.py
 
-# Script used for the first succesful implementation of the cluster
-/Users/ricoandreschmitt/Code/GitHub/cluster_allmzheimer/JSON_prompt_generator.py # - this script contained the 0.01 rating
-# The results of these runs are generally stored here:
-/Users/ricoandreschmitt/Code/GitHub/cluster_allmzheimer
-
 
 # Figures
 /tests/plot_rating.ipynb
