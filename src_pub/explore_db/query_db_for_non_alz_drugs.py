@@ -109,7 +109,7 @@ if __name__ == "__main__":
     logging.critical("Initializing script for exporting drugbank entities from Neo4j to CSV.")
 
     # Exporting nodes containing 'alzheim'
-    output_file_path_inclusive = '/Users/ricoandreschmitt/Desktop/drugbank_drugs_alzheimers.csv'
+    output_file_path_inclusive = 'drugbank_drugs_alzheimers.csv'
     exporter_inclusive = Neo4jDrugExporter()
     exporter_inclusive.run_export_pipeline(output_file_path_inclusive, exclude_alzheim=False)
 

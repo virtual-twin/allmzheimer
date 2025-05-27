@@ -167,7 +167,7 @@ def get_drug_and_neighbors_info(uri, user, password, drugbank_id, skipped_counte
 
             # Save the prompt to a JSON file
             filename = f"{drugbank_id}.json"
-            output_dir = "/Users/ricoandreschmitt/Code/GitHub/allmzheimer/directionality_prompts"
+            output_dir = "directionality_prompts"
             os.makedirs(output_dir, exist_ok=True)
             file_path = os.path.join(output_dir, filename)
             with open(file_path, 'w') as json_file:

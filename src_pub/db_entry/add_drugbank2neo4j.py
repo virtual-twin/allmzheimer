@@ -189,7 +189,7 @@ class DrugBank2Neo4j:
 
 if __name__ == "__main__":
     logging.critical("Initializing script for adding drugbank entities to Neo4j.")
-    input_file_path = '/Users/ricoandreschmitt/Datasets/ontology_datasets_llm/drugbank_full_dataset.xml' # Fix hardcoded path here
+    input_file_path = 'drugbank_full_dataset.xml' # Update this path to the location of the DrugBank XML file on your system
     namespace = {'db': 'http://www.drugbank.ca'}
     pipeline = DrugBank2Neo4j(input_file_path, namespace)
     pipeline.run_pipeline()
