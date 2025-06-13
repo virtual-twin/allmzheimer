@@ -63,6 +63,9 @@ Refer to these instructions to obtain the files needed to replicate the results 
 ### Usage
 Compare the documentation mentioned above.
 
+### License
+CC BY-NC 4.0
+
 ## Contributing
 Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are reviewed actively.
 For a detailed description concerning contributions please refer to the HTML documentation.
