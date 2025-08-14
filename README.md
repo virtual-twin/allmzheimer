@@ -75,3 +75,5 @@ This does not affect the full responsibility of the author for all code, documen
 ## Contact
 If you have any questions or issues, please open an issue on this repository or contact us at [rico.schmitt@charite.de].
 
+# License
+CC-BY NC 4.0
