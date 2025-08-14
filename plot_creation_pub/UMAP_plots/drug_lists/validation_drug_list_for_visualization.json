@@ -27,19 +27,10 @@
     "Quetiapine",
     "Metformin",
     "Glipizide",
-    "Insulin Glargine",
     "Valproate",
-    "Carbamazepine",
-    "Levetiracetam",
-    "Cyclosporine",
-    "Tacrolimus",
-    "Mycophenolate Mofetil",
-    "Acyclovir",
     "Oseltamivir",
-    "Remdesivir",
     "Ibuprofen",
     "Naproxen",
-    "Diclofenac",
     "Morphine",
     "Oxycodone",
     "Warfarin",
@@ -48,7 +39,5 @@
     "Omeprazole",
     "Pantoprazole",
     "Esomeprazole",
-    "Fluconazole",
-    "Amphotericin B",
-    "Alendronate"
+    "Fluconazole"
 ]
