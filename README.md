@@ -73,12 +73,12 @@ This does not affect the full responsibility of the author for all code, documen
 
 ## Maintainers
 This repository is maintained by:
-[Rico Schmitt](https://github.com/RicoSchmitt)
-[Petra Ritter](https://github.com/Petra-Ritter)
-[Brain Simulation Section at Charité](https://github.com/brainmodes) (head: Prof. Petra Ritter)
+- [Rico Schmitt](https://github.com/RicoSchmitt)
+- [Petra Ritter](https://github.com/Petra-Ritter)
+- [Brain Simulation Section at Charité](https://github.com/brainmodes) (head: Prof. Petra Ritter)
 
 ## Contact
 If you have any questions or issues, please open an issue on this repository or contact us at [petra.ritter@charite.de] .
 
 # License
-This repository is published under the open source EUPL-1.2 license. Please refer to LICENSE.md and the [EUPL-1.2] (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) webpage for further details.
+This repository is published under the open source EUPL-1.2 license. Please refer to LICENSE.md and the [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) webpage for further details.
