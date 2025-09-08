@@ -71,9 +71,14 @@ For a detailed description concerning contributions please refer to the HTML doc
 GitHub Copilot and Chat-GPT by OpenAi were used for coding assistance, formatting and debugging in this project.
 This does not affect the full responsibility of the author for all code, documentation, results and reporting.
 
+## Maintainers
+This repository is maintained by:
+[Rico Schmitt](https://github.com/RicoSchmitt)
+[Petra Ritter](https://github.com/Petra-Ritter)
+[Brain Simulation Section at Charité](https://github.com/brainmodes) (head: Prof. Petra Ritter)
 
 ## Contact
-If you have any questions or issues, please open an issue on this repository or contact us at [rico.schmitt@charite.de].
+If you have any questions or issues, please open an issue on this repository or contact us at [petra.ritter@charite.de] .
 
 # License
-CC-BY NC 4.0
+This repository is published under the open source EUPL-1.2 license. Please refer to LICENSE.md and the [EUPL-1.2] (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) webpage for further details.
