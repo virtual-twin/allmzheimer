@@ -30,10 +30,6 @@ reprod
 Directory containing the drug repurposing pipeline that can be used to reproduce results or to utilize the pipeline for new research.
 
 
-docs
-------------------------------------
-This directory contains the documentation files that allow you to read this page.
-
 plot_creation_pub
 ------------------------------------
 Here, you find the code that ran to produce the visualizations in the paper and the supplementary documents. 
@@ -51,6 +47,10 @@ This directory contains the files that were associated with the Friedman-Test co
 tests_pub
 ------------------------------------
 Here, you find the Jupyter Notebook reporting the token length analysis that was done for each rating prompt the Large Language Model was provided with to check compliance with the context window of the model.
+
+docs
+------------------------------------
+This directory contains the documentation files that generate the docs build.
 
 
 
@@ -79,4 +79,8 @@ This repository is maintained by:
 If you have any questions or issues, please open an issue on this repository or contact us at [petra.ritter@charite.de] .
 
 # License
-This repository is published under the open source EUPL-1.2 license. Please refer to LICENSE.md and the [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) webpage for further details.
+This repository is licensed under the open source EUPL-1.2 license. Please refer to LICENSE.md and the [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) webpage for further details.
+
+The following files are licensed under the open CC0 license:
+- CSV files in statistics_pub/ and tests_pub/
+- JSON files in plot_creation_pub/UMAP_plots/drug_lists/ and reprod/datasets/
