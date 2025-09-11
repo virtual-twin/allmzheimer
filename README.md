@@ -1,19 +1,34 @@
 # allmzheimer
 
-## Overview
+## Concept
 This repository is dedicated to in silico drug development selection for Alzheimer's treatment and accompanies the paper 'Biological database mining for LLM-driven Alzheimer’s Disease Drug Repurposing' (BioRxiv DOI: https://doi.org/10.1101/2024.12.04.626255).
-Please consult the docs that are also stored in this repository under /docs/build/html.
-The documentation provides you with an overview of the technology used for achieving the results presented in the paper and gives you all the information to replicate the results or to employ the modules for your own purposes.
-
-## Documentation
-Extensive documentation is available (Host HTML once public - non-public during review) at URL.
-(Currently the documentation can be achieved by running 'make html' in root/docs with a venv that has Sphinx installed)
 
 ## Reproducibility
-The entire project is conceptualized to support seamless reproducibility. Therefore, the full code and the data necessary to reproduce the results should be shared (apart from the DrugBank, which requires licensing).
+The entire project is conceptualized to support seamless reproducibility and utilization of the pipeline for new research. Therefore, the full code and the data necessary to reproduce the results are shared or made accessible.
+Our containerized reproduction pipeline is designed to transparently reproduce all plots, database setups, datasets, ratings, statistical tests and other numbers reported.
+For reproduction of the results go to the /reprod directory and read reprod/README.md (explaining all steps and requirements) and reprod/datasets/README_datasets.md (explaining how to attain the data for reproducing the results).
+
+## Reporting of results
+The directories plot_creation_pub, src_pub and statistics_pub contain jupyter notebooks to document the output we saw when we produced the results reported in the paper. While jupyter notebooks are great for documenting the code one has run, they often cause issues when trying to reproduce results (https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267). We therefore make use of both technologies. We provide you with the jupyter notebooks in the mentioned directories, so you can exactly see what we saw when we got to our results. The code in plot_creation_pub, src_pub and statistics_pub is mostly identical to the code in the /reprod directory (which allows it to run in the containerized environment). It is not meant to document.
+But you also get a complete containerized reproduction pipeline (in reprod) which is supposed to reproduce all results (updated with the most current data from the external APIs) without manual intervention.
+
+## Deviations from reported results in reproduction pipeline
+Since the external APIs (GeneOntology, Clinical Trials gov) change over time, you will see slightly different results when running the pipeline. However, these differences are expected to be within reasonable margin (e.g. if 0.5% of the GO-term mappings change after two years, this might be reasonable, if you get <10% different mappings there is most likely an issue). The code checks for such deviations (reprod/src/tests) and warns if they are within reasonable margins (so you can decide yourself if this is reasonable or not) and logs errors if there are major differences.
+Also some plots in the manuscript were slightly edited to enhance readability (never to change actual content). We describe in the code where this was the case. However, these layout adjustments should never change anything about the result of the plot and therefore, the reproduced plots reproduced are expected to be in alignment with the reported results.
+
+## Documentation
+Extensive documentation is available (TO DO: host HTML once public) at URL.
+(Currently the documentation can be achieved by running 'make html' in root/docs with a venv that has Sphinx installed)
+
+
 
 # Repository Orientation
 Please find a short description of the modules and directories below:
+
+reprod
+------------------------------------
+Directory containing the drug repurposing pipeline that can be used to reproduce results or to utilize the pipeline for new research.
+
 
 docs
 ------------------------------------
@@ -21,12 +36,13 @@ This directory contains the documentation files that allow you to read this page
 
 plot_creation_pub
 ------------------------------------
-Here, you find the code used for the visualizations in the paper and the supplementary documents.
+Here, you find the code that ran to produce the visualizations in the paper and the supplementary documents. 
+
 
 src_pub
 ------------------------------------
-This directory contains all code that was used for the paper. You may adjust it according to your needs to repurpose the code for other drug repurposing investigations (Please make sure to do that according to the CC BY NC 4.0 license provided in the repository).
-Many modules are generalizable and can be used for a variety of tasks in which ontologies or graph databases should interact with Large Language Mdoels.
+This directory contains all source code that was used for the paper.
+
 
 statistics_pub
 ------------------------------------
@@ -36,40 +52,22 @@ tests_pub
 ------------------------------------
 Here, you find the Jupyter Notebook reporting the token length analysis that was done for each rating prompt the Large Language Model was provided with to check compliance with the context window of the model.
 
-.env_template
-------------------------------------
-Refer to this .env template to adjust it to your environment.
-
-DATA_ACCESS.md
-------------------------------------
-Refer to these instructions to obtain the files needed to replicate the results from the paper.
-
 
 
 ## Getting Started
 
-
-### Installation
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/RicoSchmitt/allmzheimer.git
-    cd allmzheimer
-    ```
-2. Install the required Python packages:
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-### Usage
-Compare the documentation mentioned above.
+go to the reprod directory
 
 ## Contributing
-Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are reviewed actively.
-For a detailed description concerning contributions please refer to the HTML documentation.
+Contributions are welcome! Please fork the repository and use a feature branch.
+We highly recommend to make code changes in the /reprod directory as this directory contains the code that can be easily utilized for future projects.
+Pull requests are reviewed actively.
+
 
 ## Declaration of generative AI use for coding
-GitHub Copilot and Chat-GPT by OpenAi were used for coding assistance, formatting and debugging in this project.
-This does not affect the full responsibility of the author for all code, documentation, results and reporting.
+GitHub Copilot and Chat-GPT were used for formatting, debugging and coding assistance in this project.
+This does not affect the full responsibility of the authors for all code, documentation, results and reporting.
+
 
 ## Maintainers
 This repository is maintained by:
