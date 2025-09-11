@@ -1,5 +1,9 @@
 # Ignore dataset directory
-datasets/
+reprod/datasets/drugbank_full_dataset.xml
+reprod/datasets/filtered_ARUK-UCL-GO-terms.tsv
+
+# export
+reprod/exports/
 
 # Generally ignore database files
 *.db
@@ -15,7 +19,15 @@ docs/logs/
 
 
 # Ignore other generated files
+*.csv
 *.tsv
+*.json
+
+# Track these specific json files with drug lists for results reproducibility
+!reprod/datasets/cummings_eta_al_AD_DR_candidates.json
+!reprod/datasets/validation_drug_list_for_visualization.json
+
+# Ignore plots
 *.jpg
 *.mov
 *.mp4
@@ -29,7 +41,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.pytest_cache
-
+*cache*
 
 # Logging files
 *.log
