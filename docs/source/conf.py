@@ -14,16 +14,21 @@
 import os
 import sys
 import logging
+from pathlib import Path
 
+# conf.py is in docs/source; repo root is two levels up; `reprod` sits there.
+REPO_ROOT = Path(__file__).resolve().parents[2]
+REPROD_ROOT = REPO_ROOT / "reprod"
 
-sys.path.insert(0, os.path.abspath('../../'))
+# Ensure Python can import the package named `src` inside reprod/src
+sys.path.insert(0, str(REPROD_ROOT))
 
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'allmzheimer'
-copyright = '2024, Rico Schmitt'
+copyright = '2025, Rico Schmitt'
 author = 'Rico Schmitt'
 
 

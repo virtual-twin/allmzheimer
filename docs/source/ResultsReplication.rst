@@ -1,142 +1,19 @@
-Results Replication
-===============================================
+Reproduction of Results
+=======
 
-Order of scripts to be run
----------------------------------------------------------------------------
+The complete reproduction pipeline is provided in the reprod/ directory.
+It runs all methods and regenerates every result (plots, statistics, database entries, prompts) inside a containerized environment.
+The pipeline reproduces results with current external data sources (e.g. GeneOntology, ClinicalTrials.gov). Minor deviations from the published manuscript may occur but are checked automatically for reasonable margins.
 
-# Adding data 
-add_arukuclprocess2neo4j.py
-add_drugbank2neo4j.py
-update_additional.py
-update_additionaldrugbankvaluesinneo4j.py
-add_pathology2neo4j.py
-GO_term_mapping.py
-connect_bioprocess_with_drug.py
+For transparency, Jupyter notebooks in plot_creation_pub/, src_pub/, statistics_pub/, and tests_pub/ document the outputs we obtained when preparing the manuscript. These complement, but do not replace, the containerized pipeline.
 
-# Filtering data
-remove_island_drugs.py
-
-# Llama setup
-JSON_prompt_generator.py
-JSONdrug2LLM.py
-integrate_cluster_jsons.py
-
-# Figures
-/tests/plot_rating.ipynb
-
-This page provides cypher code for queries to replicate all results from the paper.
+Docker compose setup
+-----
+To standardize the environment we provide to researchers using our code, we have decided to provide a containerized pipeline. 
+Within in this pipeline, the code runs on predefined versions (requirements.txt) and processes the data stored in /reprod/datasets (unless you change the dataset paths by making use of the .env).
 
 
-Total number of added proteins
-----------------------------------------------------------------------------
-.. code-block:: cypher
-    MATCH (p: Protein)
-    RETURN COUNT (p)
+To get started in the code:
+	•	Read reprod/README.md for instructions on running the Docker setup.
+	•	Read reprod/datasets/README_datasets.md for guidance on obtaining the required datasets.
 
-Expected result:
-**1412**
-
-Total number of unique biological processes added
-----------------------------------------------------------------------------
-.. code-block:: cypher 
-    MATCH (b: BiologicalProcess)
-    RETURN COUNT (b)
-
-Expected result:
-**1778**
-
-Please note:
-If you just import the biological processes and proteins from the ARUKU-UCL dataset and create a node for each row the number of BiologicalProcess and Protein nodes will be higher.
-Specifically, you will get these numbers:
-BiologicalProcess count: 8780
-Protein count: 1757
-
-However, there are only 1778 unique biological processes. 
-In the Gene Product column of the ARUKU-UCL dataset there are 1757 unique values. However, only 1414 of them are valid UniProt proteins. 
-There are 364 ComplexPortal entities which were ignored. Moreover, when fetching the proteins from the ARUK-UCL dataset to UniProt (28.05.2024) there were two API errors because the UniProt ID was not connected with data.
-So here is a summary how 1412 protein nodes are created:
-1412 + 2 + 343 = 1757
-Included protein nodes + Failed API requests + ComplexPortal = Total number in ARUK-UCL dataset
-
-Drugs from the Drugbank that have Alzheimer's as an indication
-----------------------------------------------------------------------------
-
-.. code-block:: cypher
-
-    MATCH (d:Drug)
-    WHERE toLower(d.indication) CONTAINS 'alzheim'
-    RETURN COUNT(d)
-    
-Result:
--------
-
-43
-
-
-Drugs for Repurposing - No Alzheimer's indication
-----------------------------------------------------------------------------
-
-.. code-block:: cypher
-
-    MATCH (d:Drug)
-    WHERE NOT toLower(d.indication) CONTAINS 'alzheim' OR d.indication IS NULL OR d.indication = ''
-    RETURN COUNT(d)
-    
-Result:
--------
-
-5592
-
-
-Total drug nodes that are connected to biological processes and therefore remained in the database
-----------------------------------------------------------------------------
-
-.. code-block:: cypher
-
-    MATCH (d : Drug)
-    RETURN COUNT(d)
-    
-Result:
--------
-
-5635
-
-
-Check of numbers
---------------------
-
-Drugs with Alzheimer's indication + Drugs without Alzheimer's == Total number of drugs
---------------------------------------------------------------------------------------
-
-Is that the case?
-
-.. code-block:: text
-
-    43 + 5592 == 5635
-    
-Result:
--------
-
-TRUE
-
-
-Check specific drug nodes
-----------------------------------------------------------------------------------------
-
-.. code-block:: text
-
-    MATCH (n {name: "Aducanumab"})
-    RETURN n.name, n.promising, n.reason
-
-
-Total number of recommendations
-
-Total number of added proteins
-----------------------------------------------------------------------------
-.. code-block:: cypher
-    MATCH (p: Protein)
-    RETURN COUNT (p)
-
-cliniclatrials.gov
-------------------------------------------------------------------------------------------
-2918 of the drugs have studies associated with them (first run - results not replicated yet) 

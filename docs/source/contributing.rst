@@ -4,7 +4,7 @@ Contributing
 Thank you for visiting the contributing page.
 Contributions - as code, raised concerns or additional thoughts - are welcome. 
 
-Please raise an issue on `Github <https://github.com/RicoSchmitt/allmzheimer>`_ if you find a bug or have a suggestion for a new feature.
+Please raise an issue on `Github <https://github.com/virtual-twin/allmzheimer>`_ if you find a bug or have a suggestion for a new feature.
 
 If you develop code on your own, please submit a pull request like this:
 
