@@ -1,0 +1,110 @@
+name: allmzheimer-repro-pipeline
+
+services:
+  neo4j:
+    image: neo4j:5.23-community
+    container_name: neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    # Please make use of the example.env and the explanations in it
+    # Also refer to the reprod/README.md
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH:-neo4j/testpassword}
+
+      - NEO4J_server_memory_heap_initial__size=${NEO4J_HEAP_INIT:-1G}
+      - NEO4J_server_memory_heap_max__size=${NEO4J_HEAP_MAX:-2G}
+      - NEO4J_server_memory_pagecache_size=${NEO4J_PAGECACHE:-1G}
+
+      - NEO4J_server_default__listen__address=0.0.0.0
+      - NEO4J_server_default__advertised__address=neo4j
+
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_plugins:/plugins
+      - ./datasets:/import:ro
+
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p \"$${NEO4J_AUTH#neo4j/}\" 'RETURN 1' || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+  
+  # Please note that running the ollama container is optional and you can use an external LLM API instead
+  # You may also use a local LLM API in a Kubernetes cluster or similar
+  # However, for simple and quick reproduction of the results we recommend using the ollama container with low number of iterations set in the .env file
+  # By default the rating steps are skipped (as they take a very long time to run) but the embedding steps are still run (they also require ollama)
+  # As described in the reprod/README.md file, you may run all steps of the original pipeline by setting the RUN_LLM variable to true in the .env file and the ITERATIONS variable to 10
+  # If you want to reproduce the LLM rating steps (either to reproduce the results or for your own research) we highly recommend running the
+  # ollama container on GPUs outside of this docker compose setup and setting the LLM_URL (in the .env) to the localhost (or other) URL
+  # of your setup. For the original paper of this repo, the ollama container were run on the BIH HPC cluster, not as part of this docker-compose
+  # This particular container setup is for simplifying reproducibility and to make the processes clear
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+      
+  # If you happen to run this code on a server ensure your firewall allows to pull the model from the ollama container
+  ollama-init:
+    image: curlimages/curl:8.8.0
+    depends_on:
+      ollama:
+        condition: service_started
+    command: >
+      sh -lc '
+        echo "Waiting for Ollama API...";
+        for i in $(seq 1 60); do
+          if curl -fsS http://ollama:11434/api/version >/dev/null; then break; fi;
+          sleep 2;
+        done;
+        echo "Pulling model: ${LLM_MODEL_PULL:-llama3:8b}";
+        curl -fsS -X POST http://ollama:11434/api/pull -d "{\"model\":\"${LLM_MODEL_PULL:-llama3:8b}\"}";
+        echo "Model ready.";
+      '
+    restart: "no"
+    environment:
+      - LLM_MODEL_PULL=${LLM_MODEL_PULL:-llama3:8b}
+
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: allmzheimer-repro-pipeline-container
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+      ollama-init:
+        condition: service_completed_successfully
+    volumes:
+      - ./datasets:/app/datasets:rw
+      - ./.env:/app/.env:ro
+      - ./exports:/app/exports:rw
+      - ./llm_outputs:/app/llm_outputs:rw
+    env_file:
+      - .env
+    # ENTRYPOINT is /app/entrypoint.sh
+
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_plugins:
+  ollama_data:
